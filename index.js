@@ -16,7 +16,7 @@ module.exports = toNanoseconds;
 module.exports = toSeconds;
 
 /**
- * Converts timestamp to milliseconds.
+ * Converts unix timestamp to milliseconds.
  *
  * @param {string} timestamp The unix timestamp we are converting into milliseconds.
  */
@@ -48,7 +48,7 @@ function toMilliseconds(timestamp) {
 };
 
 /**
- * Converts timestamp to microseconds.
+ * Converts unix timestamp to microseconds.
  *
  * @param {string|number} timestamp The unix timestamp we are converting into microseconds.
  */
