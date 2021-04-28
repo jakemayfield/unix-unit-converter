@@ -4,16 +4,16 @@
  * MIT Licensed
  */
 
-'use strict'
+'use strict';
 
 /**
  * Module exports.
  * @public
  */
-module.exports = toMicroseconds;
-module.exports = toMilliseconds;
-module.exports = toNanoseconds;
-module.exports = toSeconds;
+module.exports.toMicroseconds = toMicroseconds;
+module.exports.toMilliseconds = toMilliseconds;
+module.exports.toNanoseconds = toNanoseconds;
+module.exports.toSeconds = toSeconds;
 
 /**
  * Converts unix timestamp to milliseconds.
@@ -22,14 +22,14 @@ module.exports = toSeconds;
  */
 function toMilliseconds(timestamp) {
 
-  // Detect if timestamp is already milliseconds to save time.
+  // Detect if timestamp is already in milliseconds.
   if (timestamp.toString().length === 13) {
     return timestamp;
   }
 
-  let millseconds;
+  var milliseconds = null;
   timestamp = parseInt(timestamp);
-  let unit = detectUnit(timestamp);
+  var unit = detectUnit(timestamp);
 
   switch (unit) {
     case 'seconds':
@@ -54,24 +54,24 @@ function toMilliseconds(timestamp) {
  */
 function toMicroseconds(timestamp) {
 
-  // Detect if timestamp is already milliseconds to save time.
+  // Detect if timestamp is already in microseconds.
   if (timestamp.toString().length === 16) {
     return timestamp;
   }
 
-  let microseconds;
+  let microseconds = null;
   timestamp = parseInt(timestamp);
   let unit = detectUnit(timestamp);
 
   switch (unit) {
     case 'seconds':
-      milliseconds = timestamp * 1000000;
+      microseconds = timestamp * 1000000;
       break;
     case 'milliseconds':
-      milliseconds = timestamp * 1000;
+      microseconds = timestamp * 1000;
       break;
     case 'nanoseconds':
-      milliseconds = (timestamp / 1000).toFixed(0);
+      microseconds = (timestamp / 1000).toFixed(0);
       break;
   }
 
@@ -86,12 +86,12 @@ function toMicroseconds(timestamp) {
  */
 function toNanoseconds(timestamp) {
 
-  // Detect if timestamp is already nanoseconds to save time.
+  // Detect if timestamp is already in nanoseconds.
   if (timestamp.toString().length === 19) {
     return timestamp;
   }
 
-  var nanoseconds;
+  var nanoseconds = null;
   timestamp = parseInt(timestamp);
   var unit = detectUnit(timestamp);
 
@@ -119,7 +119,7 @@ function toNanoseconds(timestamp) {
  */
 function toSeconds(timestamp) {
 
-  // Detect if timestamp is already nanoseconds to save time.
+  // Detect if timestamp is already in seconds.
   if (timestamp.toString().length === 10) {
     return timestamp;
   }
