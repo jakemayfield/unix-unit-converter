@@ -43,7 +43,7 @@ function toMilliseconds(timestamp) {
       break;
   }
 
-  return parseInt(milliseconds);
+  return milliseconds;
 
 };
 
@@ -75,7 +75,7 @@ function toMicroseconds(timestamp) {
       break;
   }
 
-  return parseInt(microseconds);
+  return microseconds;
 
 };
 
@@ -107,7 +107,7 @@ function toNanoseconds(timestamp) {
       break;
   }
 
-  return parseInt(nanoseconds);
+  return nanoseconds;
 
 };
 
@@ -140,7 +140,7 @@ function toSeconds(timestamp) {
       break;
   }
 
-  return parseInt(seconds);
+  return seconds;
 
 };
 
