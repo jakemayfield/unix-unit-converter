@@ -16,9 +16,9 @@ module.exports = toNanoseconds;
 module.exports = toSeconds;
 
 /**
- * Format timeframe string in our "standard".
+ * Converts timestamp to milliseconds.
  *
- * @param {string} timestamp The timeframe we are converting the string for.
+ * @param {string} timestamp The unix timestamp we are converting into milliseconds.
  */
 function toMilliseconds(timestamp) {
 
@@ -28,6 +28,7 @@ function toMilliseconds(timestamp) {
   }
 
   let millseconds;
+  timestamp = parseInt(timestamp);
   let unit = detectUnit(timestamp);
 
   switch (unit) {
@@ -42,14 +43,14 @@ function toMilliseconds(timestamp) {
       break;
   }
 
-  return milliseconds;
+  return parseInt(milliseconds);
 
 };
 
 /**
- * Format timeframe string in our "standard".
+ * Converts timestamp to microseconds.
  *
- * @param {string} timestamp The timeframe we are converting the string for.
+ * @param {string|number} timestamp The unix timestamp we are converting into microseconds.
  */
 function toMicroseconds(timestamp) {
 
@@ -58,29 +59,30 @@ function toMicroseconds(timestamp) {
     return timestamp;
   }
 
-  let millseconds;
+  let microseconds;
+  timestamp = parseInt(timestamp);
   let unit = detectUnit(timestamp);
 
   switch (unit) {
     case 'seconds':
+      milliseconds = timestamp * 1000000;
+      break;
+    case 'milliseconds':
       milliseconds = timestamp * 1000;
       break;
-    case 'microseconds':
-      milliseconds = (timestamp / 1000).toFixed(0);
-      break;
     case 'nanoseconds':
-      milliseconds = (timestamp * 1000000).toFixed(0);
+      milliseconds = (timestamp / 1000).toFixed(0);
       break;
   }
 
-  return milliseconds;
+  return parseInt(microseconds);
 
 };
 
 /**
  * Convert unix timestamp to nanoseconds.
  *
- * @param {string} timestamp The timeframe we are converting the string for.
+ * @param {string|number} timestamp The unix timestamp we are converting into nanoseconds.
  */
 function toNanoseconds(timestamp) {
 
@@ -90,6 +92,7 @@ function toNanoseconds(timestamp) {
   }
 
   var nanoseconds;
+  timestamp = parseInt(timestamp);
   var unit = detectUnit(timestamp);
 
   switch (unit) {
@@ -97,21 +100,21 @@ function toNanoseconds(timestamp) {
       nanoseconds = timestamp * 1000000000;
       break;
     case 'milliseconds':
-      nanoseconds = (timestamp * 1000000).toFixed(0);
+      nanoseconds = timestamp * 1000000;
       break;
     case 'microseconds':
-      nanoseconds = (timestamp * 1000).toFixed(0);
+      nanoseconds = timestamp * 1000;
       break;
   }
 
-  return nanoseconds;
+  return parseInt(nanoseconds);
 
 };
 
 /**
  * Convert unix timestamp to seconds.
  *
- * @param {mixed} timestamp The number|string The timeframe we are converting the string for.
+ * @param {string|number} timestamp The unix timestamp we are converting into seconds.
  * @return {number}
  */
 function toSeconds(timestamp) {
@@ -121,24 +124,23 @@ function toSeconds(timestamp) {
     return timestamp;
   }
 
-  return null;
+  var seconds = null;
+  timestamp = parseInt(timestamp);
+  var unit = detectUnit(timestamp);
 
-  // var seconds = null;
-  // var unit = detectUnit(timestamp);
-  //
-  // switch (unit) {
-  //   case 'milliseconds':
-  //     seconds = (timestamp * 1000000).toFixed(0);
-  //     break;
-  //   case 'microseconds':
-  //     seconds = (timestamp * 1000).toFixed(0);
-  //     break;
-  //   case 'nanoseconds':
-  //     seconds = timestamp * 1000000000;
-  //     break;
-  // }
-  //
-  // return parseInt(seconds);
+  switch (unit) {
+    case 'milliseconds':
+      seconds = (timestamp / 1000).toFixed(0);
+      break;
+    case 'microseconds':
+      seconds = (timestamp / 1000000).toFixed(0);
+      break;
+    case 'nanoseconds':
+      seconds = (timestamp / 1000000000).toFixed(0);
+      break;
+  }
+
+  return parseInt(seconds);
 
 };
 
